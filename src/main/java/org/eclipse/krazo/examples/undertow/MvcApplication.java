@@ -1,7 +1,6 @@
 package org.eclipse.krazo.examples.undertow;
 
 import javax.mvc.engine.ViewEngine;
-import javax.ws.rs.ApplicationPath;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -9,7 +8,6 @@ import java.util.Set;
 /**
  * @author Gregor Tudan
  */
-@ApplicationPath("/mvc")
 public class MvcApplication extends javax.ws.rs.core.Application {
 
     @Override
