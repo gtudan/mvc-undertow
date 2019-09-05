@@ -17,13 +17,18 @@ public class Server {
 
     private UndertowJaxrsServer server = new UndertowJaxrsServer();
 
-    private Server() {
+    public Server(String host, int port) {
         Undertow.Builder undertow = Undertow.builder()
-                .addHttpListener(8080, "localhost");
+                .addHttpListener(port, host);
         server.start(undertow);
     }
 
-    private void deploy() {
+    public static void main(String[] args) {
+        final Server server = new Server("localhost", 8080);
+        server.deploy();
+    }
+
+    public void deploy() {
         ResteasyDeployment deployment = new ResteasyDeploymentImpl();
         deployment.setApplicationClass(MvcApplication.class.getName());
         deployment.setInjectorFactoryClass("org.jboss.resteasy.cdi.CdiInjectorFactory");
@@ -38,9 +43,7 @@ public class Server {
         server.deploy(deploymentInfo);
     }
 
-
-    public static void main(String[] args) {
-        final Server server = new Server();
-        server.deploy();
+    public void shutdown() {
+        server.stop();
     }
 }

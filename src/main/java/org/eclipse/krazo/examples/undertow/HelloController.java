@@ -15,8 +15,15 @@ import javax.ws.rs.QueryParam;
 @Controller
 public class HelloController {
 
-    @Inject
     private Models models;
+
+    public HelloController() {
+    }
+
+    @Inject
+    public HelloController(Models models) {
+        this.models = models;
+    }
 
     @GET
     public String hello(@QueryParam("name") @DefaultValue("World") String name) {
